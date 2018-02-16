@@ -1,3 +1,24 @@
+## EMR
+
+### Configuration
+
+#### Spark
+
+- /etc/spark/conf/spark-defaults.conf
+
+see: https://stackoverflow.com/questions/34003759/spark-emr-using-amazons-maximizeresourceallocation-setting-does-not-use-all
+
+```
+spark.maximizeResourceAllocation true # Otherwise, spark "downsizes" based on job
+spark.default.parallelism        200  # Set default parallelism, since maximizeResourceAllocation does this ONLY AT START. 
+```
+Add packages via:
+
+```
+spark.jars.packages              com.databricks:spark-xml_2.11:0.4.1
+```
+All of this can be configured at cluster creation time by specifying: `classification=spark-defaults,properties=[spark.jars.packages=com.databricks:spark-xml_2.11:0.4.1]`, for example.
+
 ## DataFrames
 
 ### Spark XML
