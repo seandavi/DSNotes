@@ -1,8 +1,8 @@
-## EMR
+# EMR
 
-### Configuration
+## Configuration
 
-#### Spark
+### Spark
 
 - /etc/spark/conf/spark-defaults.conf
 
@@ -19,9 +19,9 @@ spark.jars.packages              com.databricks:spark-xml_2.11:0.4.1
 ```
 All of this can be configured at cluster creation time by specifying: `classification=spark-defaults,properties=[spark.jars.packages=com.databricks:spark-xml_2.11:0.4.1]`, for example.
 
-## DataFrames
+# DataFrames
 
-### Spark XML
+## Spark XML
 
 ```
 import org.apache.spark.sql.SQLContext
@@ -224,7 +224,7 @@ root
  |-- _xsi: string (nullable = true)
  ```
  
-### CSV files
+## CSV files
 
 see https://github.com/databricks/spark-csv#scala-api
 
