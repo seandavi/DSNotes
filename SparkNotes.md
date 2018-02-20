@@ -1,3 +1,19 @@
+# spark and python
+
+## PySpark notebook
+
+```
+export SPARK_HOME=/usr/local/spark-2.2.1-bin-hadoop2.7
+export PATH=$PATH:$SPARK_HOME/bin
+export PYTHONPATH=$PYTHONPATH:/usr/local/spark-2.2.0-bin-hadoop2.7/python
+PYSPARK_PYTHON=python PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark --master='local[*]' --packages 
+```
+
+# Packages
+
+- XML: --packages com.databricks:spark-xml_2.11:0.4.1
+
+
 # EMR
 
 ## Configuration
