@@ -21,12 +21,41 @@ PYSPARK_PYTHON=python PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="
 
 ## Job submission
 
-Python example. Notice how `--deploy-mode,cluster` is used. The path to the python file must be given in s3. Local files on the disk do not work in this mode.
+- Python example. Notice how `--deploy-mode,cluster` is used. The path to the python file must be given in s3. Local files on the disk do not work in this mode.
 
 ```
 aws emr --profile=emr --region=us-east-1 add-steps \
   --cluster-id j-1CGC1FEMNER0L \
   --steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,s3://omics_metadata/xml_loader.py,s3n://omics_metadata/sra/reports/Mirroring/NCBI_SRA_Mirroring_20180201_Full/meta_study_set.xml.gz,s3n://omics_metadata/testing/study_parquet/,STUDY,-p,200]
+```
+
+- boto3
+
+```
+class Example:
+  def run(self):
+    session = boto3.Session(profile_name='emr-profile')
+    client = session.client('emr')
+    response = client.add_job_flow_steps(
+    JobFlowId=cluster_id,
+    Steps=[
+        {
+            'Name': 'string',
+            'ActionOnFailure': 'CONTINUE',
+            'HadoopJarStep': {
+                'Jar': 'command-runner.jar',
+                'Args': [
+                    '/usr/bin/spark-submit',
+                    '--verbose',
+                    '--class',
+                    'my.spark.job',
+                    '--jars', '\'<coma, separated, dependencies>\'',
+                    '<my spark job>.jar'
+                ]
+            }
+        },
+    ]
+)
 ```
 
 ## Configuration
