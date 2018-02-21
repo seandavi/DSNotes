@@ -79,6 +79,16 @@ All of this can be configured at cluster creation time by specifying: `classific
 
 # DataFrames
 
+## Schema work
+
+The `df.dtypes` approach seems to be the most pythonic and useful. However, the way the thing below is written, we end up parsing strings! But it does work.
+
+```
+flat_cols = [c[0] for c in nested_df.dtypes if c[1][:6] != 'struct']
+nested_cols = [c[0] for c in nested_df.dtypes if c[1][:6] == 'struct']
+list([c + ".*" for c in nested_cols])
+```
+
 ## Spark XML
 
 ```
