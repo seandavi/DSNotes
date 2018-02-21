@@ -24,7 +24,9 @@ PYSPARK_PYTHON=python PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="
 Python example. Notice how `--deploy-mode,cluster` is used. The path to the python file must be given in s3. Local files on the disk do not work in this mode.
 
 ```
-aws emr --profile=emr --region=us-east-1 add-steps --cluster-id j-1CGC1FEMNER0L --steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,s3://omics_metadata/xml_loader.py,s3n://omics_metadata/sra/reports/Mirroring/NCBI_SRA_Mirroring_20180201_Full/meta_study_set.xml.gz,s3n://omics_metadata/testing/study_parquet/,STUDY,-p,200]
+aws emr --profile=emr --region=us-east-1 add-steps \
+  --cluster-id j-1CGC1FEMNER0L \
+  --steps Type=Spark,Name="Spark Program",ActionOnFailure=CONTINUE,Args=[--deploy-mode,cluster,s3://omics_metadata/xml_loader.py,s3n://omics_metadata/sra/reports/Mirroring/NCBI_SRA_Mirroring_20180201_Full/meta_study_set.xml.gz,s3n://omics_metadata/testing/study_parquet/,STUDY,-p,200]
 ```
 
 ## Configuration
