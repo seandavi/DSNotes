@@ -8,9 +8,33 @@
 ```
 export SPARK_HOME=/usr/local/spark-2.2.1-bin-hadoop2.7
 export PATH=$PATH:$SPARK_HOME/bin
-export PYTHONPATH=$PYTHONPATH:/usr/local/spark-2.2.0-bin-hadoop2.7/python
+export PYTHONPATH=$PYTHONPATH:$SPARK_HOME/python:$SPARK_HOME/python/py4j-src.zip
+# TO RUN PYSPARK as a NOTEBOOK--probably not what you want
 PYSPARK_PYTHON=python PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook" pyspark --master='local[*]' --packages 
+# TO RUN JUPYTER with PYTHON and pyspark on PYTHONPATH, do the above and then:
+jupyter lab --ip='*' --no-browser
 ```
+
+## anaconda python for pyspark
+
+```
+wget --quiet https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh -O ~/anaconda.sh \
+    && /bin/bash ~/anaconda.sh -b -p $HOME/conda
+
+echo -e '\nexport PATH=$HOME/conda/bin:$PATH' >> $HOME/.bashrc && source $HOME/.bashrc
+
+# install packages
+conda install -y -c conda-forge jupyterlab
+```
+
+
+Add to **BOTH** .bashrc AND /etc/spark/conf/spark-env.sh
+
+```
+export PYSPARK_PYTHON=/home/hadoop/conda/bin/python
+export PYSPARK_DRIVER_PYTHON=/home/hadoop/conda/bin/python
+```
+
 
 # Packages
 
